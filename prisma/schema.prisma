@@ -1,0 +1,36 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/prisma/generated"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model CardiovascularData {
+  id                  String   @id @default(cuid())
+  age                 Int      // Age in years
+  sex                 Int      // Gender: 0 = Female, 1 = Male
+  angina              Int      // Chest pain: 1 = Stable angina, 2 = Unstable angina, 3 = Other pains, 4 = Asymptomatic
+  bloodPressure       Int      // Resting blood pressure (mmHg)
+  cholesterol         Int      // Cholesterol levels (mg/dl)
+  glycemia            Int      // Fasting blood sugar: 0 = Less than 120 mg/dl, 1 = More than 120 mg/dl
+  ecg                 Int      // Electrocardiogram results: 0 = Normal, 1 = Anomalies, 2 = Hypertrophy
+  heartRate           Int      // Maximum heart rate reached
+  anginaAfterSport    Int      // Angina pectoris after physical exertion: 0 = No, 1 = Yes
+  ecgAngina           Float    // Measure of the angina pectoris on the electrocardiogram
+  ecgSlope            Int      // Slope on the electrocardiogram: 1 = Rising, 2 = Stable, 3 = Falling
+  fluoroscopy         Int      // Fluoroscopy results: 0 = No anomaly, 1 = Low, 2 = Medium, 3 = High
+  thalassemia         Int      // Presence of Thalassaemia: 3 = No, 6 = Thalassaemia under control, 7 = Unstable Thalassaemia
+  disease             Int      // Presence of cardiovascular disease: 0 = No, 1/2/3/4 = Yes
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  @@map("cardiovascular_data")
+}
